@@ -55,7 +55,7 @@ steps:
       - functions
       - deploy
       - analyze
-      - --env-vars-file=env-vars.yaml
+      - --env-vars-file=orig/env-vars.yaml
       - --entry-point=generate_alert
       - --runtime=python38
       - --region=${_REGION}
