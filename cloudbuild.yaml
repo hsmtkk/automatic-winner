@@ -10,7 +10,7 @@ steps:
       - trace
       - --trigger-http
       - --runtime
-      - nodejs10
+      - nodejs12
       - --memory
       - 1GB
       - --source
