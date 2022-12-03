@@ -1,0 +1,19 @@
+---
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: trace
+    waitFor: ['-']
+    entrypoint: gcloud
+    args:
+      - functions
+      - deploy
+      - trace
+      - --trigger-http
+      - --runtime
+      - nodejs10
+      - --memory
+      - 1GB
+      - --source
+      - tracer
+      - --env-vars-file
+      - env-vars.yaml
