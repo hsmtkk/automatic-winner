@@ -39,8 +39,34 @@ steps:
       - python38
       - --source
       - orig/analyzer
+      - --entry-point
+      - analyze
       - --env-vars-file
       - orig/env-vars.yaml
+      - --gen2
+      - --region
+      - ${_REGION}
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: alert
+    waitFor: ['-']
+    entrypoint: gcloud
+    args:
+      - functions
+      - deploy
+      - analyze
+      - --trigger-resource
+      - projects/${PROJECT_ID}/databases/(default)/documents/page-metrics/{any}
+      - --trigger-event
+      - providers/cloud.firestore/eventTypes/document.create
+      - --runtime
+      - python38
+      - --source
+      - orig/alerter
+      - --env-vars-file
+      - orig/env-vars.yaml
+      - --entry-point
+      - generate_alert
       - --gen2
       - --region
       - ${_REGION}
