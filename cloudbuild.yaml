@@ -14,6 +14,28 @@ steps:
       - --memory
       - 1GB
       - --source
-      - tracer
+      - orig/tracer
       - --env-vars-file
-      - env-vars.yaml
+      - orig/env-vars.yaml
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: analyze
+    waitFor: ['-']
+    entrypoint: gcloud
+    args:
+      - functions
+      - deploy
+      - analyze
+      - --trigger-resource
+      - ${_METRICS_BUCKET}
+      - --trigger-event
+      - google.storage.object.finalize
+      - --runtime
+      - python37
+      - --source
+      - orig/analyzer
+      - --env-vars-file
+      - orig/env-vars.yaml
+
+substitutions:
+  _METRICS_BUCKET: metrics-automatic-winner
