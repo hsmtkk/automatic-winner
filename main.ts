@@ -37,6 +37,22 @@ class MyStack extends TerraformStack {
       },
     });
 
+    const tracer_job_sa = new google.serviceAccount.ServiceAccount(this, 'tracer-job-sa', {
+      accountId: 'tracer-job-sa',
+    });
+
+    new google.projectIamBinding.ProjectIamBinding(this, 'allow-cluod-functions-invoke', {
+      project,
+      members: [`serviceAccount:${tracer_job_sa.email}`],
+      role: 'roles/cloudfunctions.invoker',
+    });
+
+    new google.projectIamBinding.ProjectIamBinding(this, 'allow-cluod-run-invoke', {
+      project,
+      members: [`serviceAccount:${tracer_job_sa.email}`],
+      role: 'roles/run.invoker',
+    });
+
   }
 }
 
