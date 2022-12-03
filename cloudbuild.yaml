@@ -57,7 +57,7 @@ steps:
       - analyze
       - --trigger-resource
       - projects/${PROJECT_ID}/databases/(default)/documents/page-metrics/{any}
-      - --trigger-event
+      - --trigger-event-filters
       - providers/cloud.firestore/eventTypes/document.create
       - --runtime
       - python38
