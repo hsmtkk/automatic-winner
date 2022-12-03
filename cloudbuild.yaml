@@ -19,6 +19,9 @@ steps:
       - orig/env-vars.yaml
       - --entry-point
       - trace
+      - --gen2
+      - --region
+      - ${_REGION}
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     id: analyze
@@ -38,6 +41,10 @@ steps:
       - orig/analyzer
       - --env-vars-file
       - orig/env-vars.yaml
+      - --gen2
+      - --region
+      - ${_REGION}
 
 substitutions:
   _METRICS_BUCKET: metrics-automatic-winner
+  _REGION: asia-northeast1
