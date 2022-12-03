@@ -61,7 +61,7 @@ steps:
       - --region=${_REGION}
       - --source=orig/alerter
       - --trigger-event=providers/cloud.firestore/eventTypes/document.create
-      - --trigger-resource="projects/${PROJECT_ID}/databases/(default)/documents/page-metrics/{any}"
+      - --trigger-resource="projects/$PROJECT/databases/(default)/documents/page-metrics/{any}"
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     id: scheduler
