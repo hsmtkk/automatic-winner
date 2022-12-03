@@ -17,6 +17,8 @@ steps:
       - orig/tracer
       - --env-vars-file
       - orig/env-vars.yaml
+      - --entry-point
+      - trace
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     id: analyze
