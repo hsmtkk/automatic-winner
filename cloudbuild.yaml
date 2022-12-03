@@ -55,8 +55,6 @@ steps:
       - functions
       - deploy
       - analyze
-      - --trigger-resource
-      - projects/${PROJECT_ID}/databases/(default)/documents/page-metrics/{any}
       - --trigger-event-filters
       - type=providers/cloud.firestore/eventTypes/document.create
       - --runtime
