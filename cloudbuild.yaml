@@ -71,6 +71,14 @@ steps:
       - --region
       - ${_REGION}
 
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: scheduler
+    waitFor: ['trace']
+    script: |
+      #!/bin/sh
+      apt-get -y install jq
+      gcloud functions describe trace --gen2 --region asia-northeast1
+
 substitutions:
   _METRICS_BUCKET: metrics-automatic-winner
   _REGION: asia-northeast1
