@@ -55,19 +55,13 @@ steps:
       - functions
       - deploy
       - analyze
-      - --trigger-event-filters
-      - type=providers/cloud.firestore/eventTypes/document.create
-      - --runtime
-      - python38
-      - --source
-      - orig/alerter
-      - --env-vars-file
-      - orig/env-vars.yaml
-      - --entry-point
-      - generate_alert
-      - --gen2
-      - --region
-      - ${_REGION}
+      - --env-vars-file=env-vars.yaml
+      - --entry-point=generate_alert
+      - --runtime=python38
+      - --region=${_REGION}
+      - --source=orig/alerter
+      - --trigger-event=providers/cloud.firestore/eventTypes/document.create
+      - --trigger-resource="projects/${PROJECT_ID}/databases/(default)/documents/page-metrics/{any}"
 
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     id: scheduler
